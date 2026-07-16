@@ -489,6 +489,11 @@
                                     <StackPanel Name="InstallBtnGroup"
                                                 Orientation="Horizontal" Spacing="10"
                                                 HorizontalAlignment="Right">
+                                        <Button Name="BtnAutoConfig"
+                                                Content="🏁 Sim Racing"
+                                                Classes="BtnSuccess"
+                                                Padding="16,8"
+                                                Click="BtnAutoConfig_Click"/>
                                         <Button Name="BtnInstallManual"
                                                 Content="{DynamicResource TxtBtnManualInstall}"
                                                 Classes="BtnSuccess"

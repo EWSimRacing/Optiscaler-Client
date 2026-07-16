@@ -1,0 +1,401 @@
+{
+  "Version": "1.0.0",
+  "Description": "GPU-aware auto-configuration presets for sim racing",
+  "GpuTierDefaults": {
+    "AmdRdna3": {
+      "Upscalers": {
+        "Dx11Upscaler": "fsr31_12",
+        "Dx12Upscaler": "fsr31",
+        "VulkanUpscaler": "fsr31_12"
+      },
+      "Sharpness": {
+        "OverrideSharpness": "true",
+        "Sharpness": "0.35"
+      },
+      "Spoofing": {
+        "Dxgi": "auto"
+      },
+      "FSR": {
+        "VelocityFactor": "1.0",
+        "UpscalerIndex": "1",
+        "Fsr4Update": "false"
+      },
+      "Framerate": {
+        "FramerateLimit": "0.0"
+      },
+      "Components": {
+        "InstallFakenvapi": true,
+        "InstallNukemFG": false,
+        "InstallOptiPatcher": false,
+        "InstallExtras": false
+      },
+      "Notes": "RDNA 3 (RX 7000): FSR 3.1 native path, Fakenvapi for Reflex frame limiter"
+    },
+    "AmdRdna4": {
+      "Upscalers": {
+        "Dx11Upscaler": "fsr31_12",
+        "Dx12Upscaler": "fsr31",
+        "VulkanUpscaler": "fsr31_12"
+      },
+      "Sharpness": {
+        "OverrideSharpness": "true",
+        "Sharpness": "0.30"
+      },
+      "Spoofing": {
+        "Dxgi": "auto"
+      },
+      "FSR": {
+        "VelocityFactor": "1.0",
+        "UpscalerIndex": "0",
+        "Fsr4Update": "true",
+        "Fsr4Model": "1"
+      },
+      "Framerate": {
+        "FramerateLimit": "0.0"
+      },
+      "Components": {
+        "InstallFakenvapi": true,
+        "InstallNukemFG": false,
+        "InstallOptiPatcher": false,
+        "InstallExtras": true
+      },
+      "Notes": "RDNA 4 (RX 9000): FSR 4 with INT8 ML upscaling, native FSR4 path"
+    },
+    "AmdRdna2": {
+      "Upscalers": {
+        "Dx11Upscaler": "fsr22",
+        "Dx12Upscaler": "fsr31",
+        "VulkanUpscaler": "fsr22"
+      },
+      "Sharpness": {
+        "OverrideSharpness": "true",
+        "Sharpness": "0.40"
+      },
+      "Spoofing": {
+        "Dxgi": "auto"
+      },
+      "FSR": {
+        "VelocityFactor": "1.0",
+        "UpscalerIndex": "1"
+      },
+      "Framerate": {
+        "FramerateLimit": "0.0"
+      },
+      "Components": {
+        "InstallFakenvapi": true,
+        "InstallNukemFG": false,
+        "InstallOptiPatcher": false,
+        "InstallExtras": false
+      },
+      "Notes": "RDNA 2 (RX 6000): FSR 3.1 backend, slightly higher sharpness to compensate"
+    },
+    "NvidiaAda": {
+      "Upscalers": {
+        "Dx11Upscaler": "dlss",
+        "Dx12Upscaler": "dlss",
+        "VulkanUpscaler": "dlss"
+      },
+      "Sharpness": {
+        "OverrideSharpness": "false",
+        "Sharpness": "0.30"
+      },
+      "Spoofing": {
+        "Dxgi": "false"
+      },
+      "FSR": {},
+      "Framerate": {
+        "FramerateLimit": "0.0"
+      },
+      "Components": {
+        "InstallFakenvapi": false,
+        "InstallNukemFG": false,
+        "InstallOptiPatcher": false,
+        "InstallExtras": false
+      },
+      "Notes": "RTX 40xx: Native DLSS path, no spoofing needed"
+    },
+    "NvidiaBlackwell": {
+      "Upscalers": {
+        "Dx11Upscaler": "dlss",
+        "Dx12Upscaler": "dlss",
+        "VulkanUpscaler": "dlss"
+      },
+      "Sharpness": {
+        "OverrideSharpness": "false",
+        "Sharpness": "0.25"
+      },
+      "Spoofing": {
+        "Dxgi": "false"
+      },
+      "FSR": {},
+      "Framerate": {
+        "FramerateLimit": "0.0"
+      },
+      "Components": {
+        "InstallFakenvapi": false,
+        "InstallNukemFG": false,
+        "InstallOptiPatcher": false,
+        "InstallExtras": false
+      },
+      "Notes": "RTX 50xx: Native DLSS 4 MFG, lowest latency NVIDIA path"
+    },
+    "NvidiaAmpere": {
+      "Upscalers": {
+        "Dx11Upscaler": "dlss",
+        "Dx12Upscaler": "dlss",
+        "VulkanUpscaler": "dlss"
+      },
+      "Sharpness": {
+        "OverrideSharpness": "true",
+        "Sharpness": "0.35"
+      },
+      "Spoofing": {
+        "Dxgi": "false"
+      },
+      "FSR": {},
+      "Framerate": {
+        "FramerateLimit": "0.0"
+      },
+      "Components": {
+        "InstallFakenvapi": false,
+        "InstallNukemFG": false,
+        "InstallOptiPatcher": false,
+        "InstallExtras": false
+      },
+      "Notes": "RTX 30xx: Native DLSS, slight sharpness boost"
+    },
+    "IntelArc": {
+      "Upscalers": {
+        "Dx11Upscaler": "xess",
+        "Dx12Upscaler": "xess",
+        "VulkanUpscaler": "xess"
+      },
+      "Sharpness": {
+        "OverrideSharpness": "true",
+        "Sharpness": "0.35"
+      },
+      "Spoofing": {
+        "Dxgi": "auto"
+      },
+      "FSR": {},
+      "Framerate": {
+        "FramerateLimit": "0.0"
+      },
+      "Components": {
+        "InstallFakenvapi": true,
+        "InstallNukemFG": false,
+        "InstallOptiPatcher": false,
+        "InstallExtras": false
+      },
+      "Notes": "Intel Arc: XeSS native path, best quality on Intel hardware"
+    }
+  },
+  "ResolutionQualityMap": {
+    "_comment": "Maps resolution tier to FSR quality mode. Lower number = higher quality. 0=NativeAA, 1=UltraQuality/Quality, 2=Balanced, 3=Performance, 4=DRS, 5=UltraPerformance",
+    "HD1080": {
+      "Default": "1",
+      "Competitive": "2"
+    },
+    "QHD1440": {
+      "Default": "1",
+      "Competitive": "2"
+    },
+    "UltraWide": {
+      "Default": "2",
+      "Competitive": "2"
+    },
+    "UHD4K": {
+      "Default": "2",
+      "Competitive": "3"
+    },
+    "Above4K": {
+      "Default": "3",
+      "Competitive": "3"
+    }
+  },
+  "FrameGenConfig": {
+    "SimRacing": {
+      "Enabled": "true",
+      "FGInput": "fsrfg",
+      "FGOutput": "fsrfg",
+      "FPTSafetyMarginInMs": "0.01",
+      "FPTVarianceFactor": "0.3",
+      "FPTHybridSpin": "false",
+      "PreserveSwapChain": "true"
+    },
+    "Disabled": {
+      "Enabled": "false"
+    }
+  },
+  "SimRacingGames": [
+    {
+      "Name": "Project Motor Racing",
+      "Engine": "Madness",
+      "Api": "DX12",
+      "ExecutableNames": ["projectmotorracing.exe", "pmr.exe"],
+      "SteamAppIds": [2343590],
+      "NativeFsr": true,
+      "NativeDlss": true,
+      "FrameGenCompatible": true,
+      "RecommendedInjection": "dxgi.dll",
+      "IniOverrides": {
+        "FSR": {
+          "VerticalFov": "60.0"
+        }
+      },
+      "Notes": "Madness engine DX12. Native FSR/DLSS support. Good FG candidate. Cockpit cam benefits from Quality mode."
+    },
+    {
+      "Name": "Assetto Corsa Competizione",
+      "Engine": "UE4",
+      "Api": "DX12",
+      "ExecutableNames": ["ac2-win64-shipping.exe", "acc.exe"],
+      "SteamAppIds": [805550],
+      "NativeFsr": true,
+      "NativeDlss": true,
+      "FrameGenCompatible": true,
+      "RecommendedInjection": "dxgi.dll",
+      "IniOverrides": {
+        "Sharpness": {
+          "Sharpness": "0.40"
+        }
+      },
+      "Notes": "UE4 DX12 (DX11 deprecated). Slightly higher sharpness helps with distant car detail. FG works well."
+    },
+    {
+      "Name": "iRacing",
+      "Engine": "Custom",
+      "Api": "DX11",
+      "ExecutableNames": ["iracingsim64dx11.exe", "iracingsim64dx11app.exe"],
+      "SteamAppIds": [266410],
+      "NativeFsr": false,
+      "NativeDlss": false,
+      "FrameGenCompatible": false,
+      "RecommendedInjection": "dxgi.dll",
+      "IniOverrides": {
+        "Upscalers": {
+          "Dx11Upscaler": "fsr22"
+        }
+      },
+      "Notes": "DX11 only. FSR 2.2 native path is most stable. Frame Gen not recommended (no proper motion vectors). Focus on raw upscaling quality."
+    },
+    {
+      "Name": "Automobilista 2",
+      "Engine": "Madness",
+      "Api": "DX11",
+      "ExecutableNames": ["ams2avx.exe", "ams2.exe"],
+      "SteamAppIds": [1066890],
+      "NativeFsr": true,
+      "NativeDlss": true,
+      "FrameGenCompatible": true,
+      "RecommendedInjection": "dxgi.dll",
+      "IniOverrides": {},
+      "Notes": "Madness engine DX11. Same family as PMR. Good OptiScaler compatibility."
+    },
+    {
+      "Name": "Le Mans Ultimate",
+      "Engine": "Madness",
+      "Api": "DX12",
+      "ExecutableNames": ["lemansultimate.exe", "lmu.exe"],
+      "SteamAppIds": [1439840],
+      "NativeFsr": true,
+      "NativeDlss": true,
+      "FrameGenCompatible": true,
+      "RecommendedInjection": "dxgi.dll",
+      "IniOverrides": {},
+      "Notes": "Madness engine DX12. Same platform as PMR. Fully compatible."
+    },
+    {
+      "Name": "rFactor 2",
+      "Engine": "ISI",
+      "Api": "DX11",
+      "ExecutableNames": ["rfactor2.exe", "rf2.exe"],
+      "SteamAppIds": [365960],
+      "NativeFsr": false,
+      "NativeDlss": false,
+      "FrameGenCompatible": false,
+      "RecommendedInjection": "dxgi.dll",
+      "IniOverrides": {
+        "Upscalers": {
+          "Dx11Upscaler": "fsr22"
+        },
+        "Sharpness": {
+          "Sharpness": "0.45"
+        }
+      },
+      "Notes": "Legacy DX11 engine. Conservative settings recommended. FSR 2.2 most stable. Higher sharpness for older renderer."
+    },
+    {
+      "Name": "EA Sports WRC",
+      "Engine": "UE4",
+      "Api": "DX12",
+      "ExecutableNames": ["wrc.exe", "easportswrc.exe"],
+      "SteamAppIds": [1849250],
+      "NativeFsr": true,
+      "NativeDlss": true,
+      "FrameGenCompatible": true,
+      "RecommendedInjection": "dxgi.dll",
+      "IniOverrides": {},
+      "Notes": "UE4 DX12. Good FG compatibility. Quality mode recommended for co-driver notes visibility."
+    },
+    {
+      "Name": "F1 24",
+      "Engine": "EGO",
+      "Api": "DX12",
+      "ExecutableNames": ["f1_24.exe", "f1_24_trial.exe"],
+      "SteamAppIds": [2488620],
+      "NativeFsr": true,
+      "NativeDlss": true,
+      "FrameGenCompatible": true,
+      "RecommendedInjection": "dxgi.dll",
+      "IniOverrides": {},
+      "Notes": "Codemasters EGO engine. Native FSR/DLSS/XeSS. Excellent FG support."
+    },
+    {
+      "Name": "Forza Motorsport",
+      "Engine": "ForzaTech",
+      "Api": "DX12",
+      "ExecutableNames": ["forzamotorsport.exe"],
+      "SteamAppIds": [2440510],
+      "NativeFsr": true,
+      "NativeDlss": true,
+      "FrameGenCompatible": true,
+      "RecommendedInjection": "dxgi.dll",
+      "IniOverrides": {},
+      "Notes": "ForzaTech DX12. Native upscaler support. OptiScaler can override with better FSR quality."
+    },
+    {
+      "Name": "Assetto Corsa",
+      "Engine": "Custom",
+      "Api": "DX11",
+      "ExecutableNames": ["acs.exe", "assettocorsa.exe"],
+      "SteamAppIds": [244210],
+      "NativeFsr": false,
+      "NativeDlss": false,
+      "FrameGenCompatible": false,
+      "RecommendedInjection": "dxgi.dll",
+      "IniOverrides": {
+        "Upscalers": {
+          "Dx11Upscaler": "fsr22"
+        },
+        "Sharpness": {
+          "Sharpness": "0.50"
+        }
+      },
+      "Notes": "Legacy DX11. No native upscaler support. FSR 2.2 adds modern upscaling. Higher sharpness for older renderer."
+    },
+    {
+      "Name": "Gran Turismo 7",
+      "Engine": "Polyphony",
+      "Api": "Vulkan",
+      "ExecutableNames": ["gt7.exe", "granturismo7.exe"],
+      "SteamAppIds": [],
+      "NativeFsr": true,
+      "NativeDlss": false,
+      "FrameGenCompatible": true,
+      "RecommendedInjection": "dxgi.dll",
+      "IniOverrides": {},
+      "Notes": "Vulkan renderer (PC port). FSR native, good FG candidate."
+    }
+  ]
+}

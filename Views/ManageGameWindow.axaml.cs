@@ -1089,6 +1089,40 @@ namespace OptiscalerClient.Views
             }
         }
 
+        private async void BtnAutoConfig_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var autoConfigWindow = new AutoConfigWindow(_game);
+                var result = await autoConfigWindow.ShowDialog<bool?>(this);
+
+                if (result == true && autoConfigWindow.GeneratedProfile != null)
+                {
+                    // Save the generated profile
+                    var profileService = new ProfileManagementService();
+                    profileService.SaveProfile(autoConfigWindow.GeneratedProfile);
+
+                    // Update the profile selector to show the new profile
+                    var cmbProfile = this.FindControl<ComboBox>("CmbProfile");
+                    if (cmbProfile != null)
+                    {
+                        var profiles = profileService.GetAllProfiles();
+                        cmbProfile.ItemsSource = profiles.Select(p => p.Name).ToList();
+                        var idx = profiles.FindIndex(p => p.Name == autoConfigWindow.GeneratedProfile.Name);
+                        if (idx >= 0) cmbProfile.SelectedIndex = idx;
+                    }
+
+                    _ = ShowToastAsync($"✓ Profile '{autoConfigWindow.GeneratedProfile.Name}' created!");
+                    DebugWindow.Log($"[AutoConfig] Generated profile: {autoConfigWindow.GeneratedProfile.Name}");
+                }
+            }
+            catch (Exception ex)
+            {
+                DebugWindow.Log($"[AutoConfig] Error: {ex.Message}");
+                _ = ShowToastAsync("Auto-config failed. Check debug log.");
+            }
+        }
+
         private async void BtnInstall_Click(object sender, RoutedEventArgs e)
         {
             try { await ExecuteInstallAsync(false); }

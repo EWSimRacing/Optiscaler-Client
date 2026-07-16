@@ -1,0 +1,133 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="OptiscalerClient.Views.AutoConfigWindow"
+        Title="🏁 Sim Racing Auto-Config"
+        Width="700" Height="620"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False"
+        SystemDecorations="None"
+        Background="Transparent"
+        TransparencyLevelHint="AcrylicBlur">
+
+  <Border Background="#1E1E2E" CornerRadius="12" BorderBrush="#333346" BorderThickness="1" Padding="0">
+    <Grid RowDefinitions="44,*,Auto">
+      <!-- Title Bar -->
+      <Border x:Name="TitleBar" Grid.Row="0" Background="#16161E" CornerRadius="12,12,0,0" Padding="16,0">
+        <Grid ColumnDefinitions="*,Auto">
+          <TextBlock VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold" Foreground="#CDD6F4">
+            🏁 Sim Racing Auto-Config
+          </TextBlock>
+          <Button x:Name="BtnClose" Grid.Column="1" Content="✕" Background="Transparent"
+                  Foreground="#6C7086" FontSize="14" Padding="8,4"
+                  VerticalAlignment="Center" Click="BtnClose_Click"/>
+        </Grid>
+      </Border>
+
+      <!-- Main Content -->
+      <ScrollViewer Grid.Row="1" Padding="24,16">
+        <StackPanel Spacing="16">
+
+          <!-- GPU Detection -->
+          <Border Background="#181825" CornerRadius="8" Padding="16">
+            <StackPanel Spacing="8">
+              <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="#89B4FA">Detected GPU</TextBlock>
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBlock x:Name="TxtGpuIcon" FontSize="18" VerticalAlignment="Center"/>
+                <TextBlock x:Name="TxtGpuName" FontSize="13" Foreground="#CDD6F4" VerticalAlignment="Center"/>
+              </StackPanel>
+              <TextBlock x:Name="TxtGpuTier" FontSize="11" Foreground="#6C7086"/>
+            </StackPanel>
+          </Border>
+
+          <!-- Game Match -->
+          <Border Background="#181825" CornerRadius="8" Padding="16">
+            <StackPanel Spacing="8">
+              <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="#89B4FA">Game Profile</TextBlock>
+              <TextBlock x:Name="TxtGameMatch" FontSize="13" Foreground="#CDD6F4"/>
+              <TextBlock x:Name="TxtGameNotes" FontSize="11" Foreground="#A6ADC8" TextWrapping="Wrap"/>
+            </StackPanel>
+          </Border>
+
+          <!-- Preferences -->
+          <Border Background="#181825" CornerRadius="8" Padding="16">
+            <StackPanel Spacing="12">
+              <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="#89B4FA">Racing Preferences</TextBlock>
+
+              <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="10" ColumnSpacing="16">
+                <!-- Resolution -->
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Resolution" FontSize="12" Foreground="#BAC2DE" VerticalAlignment="Center"/>
+                <ComboBox x:Name="CmbResolution" Grid.Row="0" Grid.Column="1" FontSize="12" HorizontalAlignment="Stretch"
+                          SelectionChanged="CmbResolution_Changed">
+                  <ComboBoxItem Content="1080p" Tag="HD1080"/>
+                  <ComboBoxItem Content="1440p" Tag="QHD1440" IsSelected="True"/>
+                  <ComboBoxItem Content="Ultrawide (3440x1440)" Tag="UltraWide"/>
+                  <ComboBoxItem Content="4K" Tag="UHD4K"/>
+                  <ComboBoxItem Content="5K+" Tag="Above4K"/>
+                </ComboBox>
+
+                <!-- Refresh Rate -->
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Monitor Hz" FontSize="12" Foreground="#BAC2DE" VerticalAlignment="Center"/>
+                <ComboBox x:Name="CmbRefreshRate" Grid.Row="1" Grid.Column="1" FontSize="12" HorizontalAlignment="Stretch"
+                          SelectionChanged="CmbRefreshRate_Changed">
+                  <ComboBoxItem Content="60 Hz" Tag="60"/>
+                  <ComboBoxItem Content="120 Hz" Tag="120"/>
+                  <ComboBoxItem Content="144 Hz" Tag="144" IsSelected="True"/>
+                  <ComboBoxItem Content="165 Hz" Tag="165"/>
+                  <ComboBoxItem Content="240 Hz" Tag="240"/>
+                  <ComboBoxItem Content="360 Hz" Tag="360"/>
+                </ComboBox>
+
+                <!-- Competitive Mode -->
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Priority" FontSize="12" Foreground="#BAC2DE" VerticalAlignment="Center"/>
+                <ComboBox x:Name="CmbPriority" Grid.Row="2" Grid.Column="1" FontSize="12" HorizontalAlignment="Stretch"
+                          SelectionChanged="CmbPriority_Changed">
+                  <ComboBoxItem Content="Visual Quality" Tag="Quality" IsSelected="True"/>
+                  <ComboBoxItem Content="Low Latency (Competitive)" Tag="Competitive"/>
+                </ComboBox>
+
+                <!-- Frame Gen -->
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Frame Generation" FontSize="12" Foreground="#BAC2DE" VerticalAlignment="Center"/>
+                <ComboBox x:Name="CmbFrameGen" Grid.Row="3" Grid.Column="1" FontSize="12" HorizontalAlignment="Stretch"
+                          SelectionChanged="CmbFrameGen_Changed">
+                  <ComboBoxItem Content="Off (lowest latency)" Tag="Off" IsSelected="True"/>
+                  <ComboBoxItem Content="On (smoother motion)" Tag="On"/>
+                </ComboBox>
+              </Grid>
+
+              <CheckBox x:Name="ChkVrr" Content="I have FreeSync / G-Sync Compatible" IsChecked="True" FontSize="12"
+                        Foreground="#BAC2DE" Checked="ChkVrr_Changed" Unchecked="ChkVrr_Changed"/>
+            </StackPanel>
+          </Border>
+
+          <!-- Generated Profile Preview -->
+          <Border Background="#181825" CornerRadius="8" Padding="16">
+            <StackPanel Spacing="8">
+              <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="#89B4FA">Generated Profile</TextBlock>
+              <TextBlock x:Name="TxtProfileName" FontSize="12" Foreground="#A6E3A1" FontWeight="SemiBold"/>
+              <TextBlock x:Name="TxtProfileSummary" FontSize="11" Foreground="#BAC2DE" TextWrapping="Wrap"/>
+
+              <!-- Component Recommendations -->
+              <TextBlock FontSize="12" FontWeight="SemiBold" Foreground="#F9E2AF" Margin="0,8,0,0">Recommended Components</TextBlock>
+              <TextBlock x:Name="TxtComponents" FontSize="11" Foreground="#BAC2DE" TextWrapping="Wrap"/>
+            </StackPanel>
+          </Border>
+
+        </StackPanel>
+      </ScrollViewer>
+
+      <!-- Footer Buttons -->
+      <Border Grid.Row="2" Background="#16161E" CornerRadius="0,0,12,12" Padding="24,12">
+        <Grid ColumnDefinitions="*,Auto,Auto">
+          <TextBlock x:Name="TxtStatus" Grid.Column="0" FontSize="11" Foreground="#6C7086"
+                     VerticalAlignment="Center"/>
+          <Button x:Name="BtnApply" Grid.Column="1" Content="✦ Apply Profile" Padding="16,8"
+                  Background="#89B4FA" Foreground="#1E1E2E" FontWeight="SemiBold" FontSize="12"
+                  CornerRadius="6" Margin="0,0,8,0" Click="BtnApply_Click"/>
+          <Button x:Name="BtnCancel" Grid.Column="2" Content="Cancel" Padding="16,8"
+                  Background="#313244" Foreground="#CDD6F4" FontSize="12"
+                  CornerRadius="6" Click="BtnClose_Click"/>
+        </Grid>
+      </Border>
+    </Grid>
+  </Border>
+</Window>
