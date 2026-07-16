@@ -133,6 +133,7 @@ namespace OptiscalerClient.Services
                 return null;
 
             var gameName = game.Name?.ToLowerInvariant() ?? "";
+            var gameNameNormalized = NormalizeName(gameName);
             var exeName = Path.GetFileName(game.ExecutablePath)?.ToLowerInvariant() ?? "";
             int.TryParse(game.AppId, out var steamAppId);
 
@@ -146,14 +147,26 @@ namespace OptiscalerClient.Services
                 if (steamAppId > 0 && profile.SteamAppIds.Contains(steamAppId))
                     return profile;
 
-                // Fuzzy match by game name
-                var profileNameLower = profile.Name.ToLowerInvariant();
-                if (!string.IsNullOrEmpty(gameName) && 
-                    (gameName.Contains(profileNameLower) || profileNameLower.Contains(gameName)))
+                // Normalized fuzzy match (strips spaces, punctuation, "game" suffix)
+                var profileNormalized = NormalizeName(profile.Name.ToLowerInvariant());
+                if (!string.IsNullOrEmpty(gameNameNormalized) && !string.IsNullOrEmpty(profileNormalized) &&
+                    (gameNameNormalized.Contains(profileNormalized) || profileNormalized.Contains(gameNameNormalized)))
                     return profile;
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Normalizes a name for fuzzy matching by removing spaces, punctuation, and common suffixes.
+        /// </summary>
+        private static string NormalizeName(string name)
+        {
+            // Remove common suffixes
+            var normalized = name.Replace("game", "").Replace("the", "");
+            // Strip non-alphanumeric
+            normalized = new string(normalized.Where(char.IsLetterOrDigit).ToArray());
+            return normalized.Trim();
         }
 
         /// <summary>
@@ -243,15 +256,24 @@ namespace OptiscalerClient.Services
             if (!profile.IniSettings.ContainsKey("FrameGen"))
                 profile.IniSettings["FrameGen"] = new Dictionary<string, string>();
 
-            if (prefs.EnableFrameGen && _presets?.FrameGenConfig != null)
+            if (prefs.EnableFrameGen)
             {
-                if (_presets.FrameGenConfig.ContainsKey("SimRacing"))
+                // Always set Enabled=true when user wants FG
+                profile.IniSettings["FrameGen"]["Enabled"] = "true";
+
+                if (_presets?.FrameGenConfig != null && _presets.FrameGenConfig.ContainsKey("SimRacing"))
                 {
                     var fgConfig = _presets.FrameGenConfig["SimRacing"];
                     foreach (var kv in fgConfig)
                     {
                         profile.IniSettings["FrameGen"][kv.Key] = kv.Value;
                     }
+                }
+                else
+                {
+                    // Fallback FG settings if presets unavailable
+                    profile.IniSettings["FrameGen"]["FGInput"] = "fsrfg";
+                    profile.IniSettings["FrameGen"]["FGOutput"] = "fsrfg";
                 }
 
                 // FSRFG tuning for sim racing
